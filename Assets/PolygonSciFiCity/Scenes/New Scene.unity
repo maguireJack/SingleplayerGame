@@ -1820,6 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 876cfc9f8f0f2594cb4a616b074d0be7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  camera: {fileID: 0}
   points:
   - {fileID: 1210988775}
   - {fileID: 2143858550}
@@ -4308,6 +4309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1940834769}
+  cam: {fileID: 512992013}
 --- !u!4 &1210988777
 Transform:
   m_ObjectHideFlags: 0
@@ -6917,7 +6919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950051439177134, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.04
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 4950051439177134, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6949,6 +6951,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4950051439177134, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95910397095232528, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: e30b2f2f53282fa46abf2e37e4751b5d, type: 3}
+    - target: {fileID: 95910397095232528, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 06f233dea7cf0ab4cb599db7282997a8, type: 2}
+    - target: {fileID: 95910397095232528, guid: 6909982d91f86a04e831a86fff27cd80, type: 3}
+      propertyPath: m_ApplyRootMotion
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -8043,3 +8057,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1940834769}
+  cam: {fileID: 512992013}
