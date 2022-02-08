@@ -19,7 +19,6 @@ public class PointBrain : MonoBehaviour
 
         RaycastHit hit;
 
-
         if (Physics.Raycast(gameObject.transform.position, (player.transform.position - gameObject.transform.position), out hitInfo, 100f, 3))
         {
             cam.transform.LookAt(player.transform);

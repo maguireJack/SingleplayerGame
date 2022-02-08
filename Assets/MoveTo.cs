@@ -6,13 +6,16 @@ public class MoveTo : MonoBehaviour
 {
 
     public Transform goal;
+    public GameObject clickImage;
     private NavMeshAgent agent;
     private GameObject hitImage;
-    public GameObject clickImage;
+    private Animator animator;
+    
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         agent.destination = goal.position;
     }
 
@@ -23,16 +26,18 @@ public class MoveTo : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if(Physics.Raycast(ray, out RaycastHit hitinfo, 100f))
             {
-                if(agent.velocity.magnitude <= 0)
+                animator.SetBool("isWalking", true);
+                if (hitImage)
                 {
-                    if(hitImage)
-                    {
-                        hitImage.GetComponent<ParticleSystem>().Stop();
-                        Destroy(hitImage);
-                    }
-                    agent.SetDestination(hitinfo.point);
-                    hitImage = Instantiate(clickImage, hitinfo.point, Quaternion.identity);
-                    hitImage.GetComponent<ParticleSystem>().Play();
+                    hitImage.GetComponent<ParticleSystem>().Stop();
+                    Destroy(hitImage);
+                }
+                agent.SetDestination(hitinfo.point);
+                hitImage = Instantiate(clickImage, hitinfo.point, Quaternion.identity);
+                hitImage.GetComponent<ParticleSystem>().Play();
+                if (agent.velocity.magnitude >= 0)
+                {
+                    animator.SetBool("isWalking", true);
                 }
             }
         }
