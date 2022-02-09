@@ -14,6 +14,8 @@ public class MoveTo : MonoBehaviour
     private Animator animator;
     private DoorHandler doorHandler;
     public bool entered = false;
+    public bool alley = false;
+    public bool chopshop = false;
     private Vector3 doorPos;
     
 
@@ -57,13 +59,19 @@ public class MoveTo : MonoBehaviour
         {
             if (!entered) {
                 doorHandler.moveDoor = true;
-                agent.SetDestination(doorHandler.exitPoint.position);
+                //agent.SetDestination(doorHandler.exitPoint.position);
+                StartCoroutine(WaitForDoor(doorHandler.exitPoint.position));
             }
             else if (entered)
             {
                 doorHandler.moveDoor = true;
-                agent.SetDestination(doorHandler.enterPoint.position);
+                //agent.SetDestination(doorHandler.enterPoint.position);
+                StartCoroutine(WaitForDoor(doorHandler.enterPoint.position));
+
             }
+        }
+        else if (other.tag == "Alley")
+        {
         }
         else if (other.tag == "AI")
         {
@@ -77,12 +85,19 @@ public class MoveTo : MonoBehaviour
             entered = !entered;
             doorHandler.moveDoor = false;
         }
+        else if (other.tag == "Alley")
+        {
+            alley = !alley;
+        }
+        else if (other.tag == "Chopshop")
+        {
+            chopshop = !chopshop;
+        }
     }
 
-    //IEnumerator WaitForDoor(Vector3 pos)
-    //{
-        
-    //    agent.SetDestination(pos);
-    //    entered = !entered;
-    //}
+    IEnumerator WaitForDoor(Vector3 pos)
+    {
+        yield return new WaitForSeconds(1);
+        agent.SetDestination(pos);
+    }
 }

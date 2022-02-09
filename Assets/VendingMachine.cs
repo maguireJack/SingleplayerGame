@@ -8,6 +8,7 @@ public class VendingMachine : MonoBehaviour
     private GameObject bottle;
 
     private bool pickable;
+    private bool picked;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,11 @@ public class VendingMachine : MonoBehaviour
 
     void Drop()
     {
-        bottle.SetActive(true);
+        if (!picked)
+        {
+            bottle.SetActive(true);
+            picked = true;
+        }
+       
     }
 }

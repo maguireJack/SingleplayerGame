@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Door
+  - Alley
+  - Head
+  - LArm
+  - RArm
+  - LLeg
+  - RLeg
+  - Chest
+  - ChopShop
+  - Chopshop
   layers:
   - Default
   - TransparentFX

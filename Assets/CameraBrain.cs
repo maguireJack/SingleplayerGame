@@ -17,7 +17,7 @@ public class CameraBrain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!points[2].GetComponent<PointBrain>().player.GetComponent<MoveTo>().entered) {
+        if (!points[2].GetComponent<PointBrain>().player.GetComponent<MoveTo>().entered && !points[2].GetComponent<PointBrain>().player.GetComponent<MoveTo>().alley) {
             if (points[0].GetComponent<PointBrain>().hitInfo.distance > points[1].GetComponent<PointBrain>().hitInfo.distance)
             {
                 camera.transform.position = points[1].transform.position;
@@ -29,6 +29,12 @@ public class CameraBrain : MonoBehaviour
         } else if (points[2].GetComponent<PointBrain>().player.GetComponent<MoveTo>().entered)
         {
             camera.transform.position = points[2].transform.position;
+        } else if (points[1].GetComponent<PointBrain>().player.GetComponent<MoveTo>().alley)
+        {
+            camera.transform.position = points[3].transform.position;
+        }if (points[1].GetComponent<PointBrain>().player.GetComponent<MoveTo>().chopshop)
+        {
+            camera.transform.position = points[4].transform.position;
         }
     }
 }
