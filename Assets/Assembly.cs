@@ -7,9 +7,8 @@ public class Assembly : MonoBehaviour
     public Inventory inventory;
     public Material material;
     public List<GameObject> parts;
-    private bool matching;
-
-    
+    public List<GameObject> activeParts;
+    public List<bool> enableds;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +26,16 @@ public class Assembly : MonoBehaviour
                 {
                     part.GetComponent<Outline>().enabled = false;
                     part.GetComponent<Renderer>().material = material;
+                    //enableds[parts.IndexOf(part)] = true;
+                    
                 }
             }
         }
+        //if(enableds.Count >= 5)
+        //{
+        //    //win
+        //    Debug.Log("Win");
+        //}
     }
+
 }
