@@ -1,4 +1,6 @@
 // MoveTo.cs
+using PixelCrushers.DialogueSystem;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,10 +12,14 @@ public class MoveTo : MonoBehaviour
     private NavMeshAgent agent;
     private GameObject hitImage;
     private Animator animator;
+    private DoorHandler doorHandler;
+    public bool entered = false;
+    private Vector3 doorPos;
     
 
     void Start()
     {
+        doorHandler = GetComponent<DoorHandler>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         agent.destination = goal.position;
@@ -24,9 +30,8 @@ public class MoveTo : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if(Physics.Raycast(ray, out RaycastHit hitinfo, 100f))
+            if(Physics.Raycast(ray, out RaycastHit hitinfo, 100f, 1 << 6))
             {
-                animator.SetBool("isWalking", true);
                 if (hitImage)
                 {
                     hitImage.GetComponent<ParticleSystem>().Stop();
@@ -38,8 +43,46 @@ public class MoveTo : MonoBehaviour
                 if (agent.velocity.magnitude >= 0)
                 {
                     animator.SetBool("isWalking", true);
+                } else
+                {
+                    animator.SetBool("isWalking", false);
                 }
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Door")
+        {
+            if (!entered) {
+                doorHandler.moveDoor = true;
+                agent.SetDestination(doorHandler.exitPoint.position);
+            }
+            else if (entered)
+            {
+                doorHandler.moveDoor = true;
+                agent.SetDestination(doorHandler.enterPoint.position);
+            }
+        }
+        else if (other.tag == "AI")
+        {
+            //other.GetComponent<DialogueSystemTrigger>().SendMessage();
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Door")
+        {
+            entered = !entered;
+            doorHandler.moveDoor = false;
+        }
+    }
+
+    //IEnumerator WaitForDoor(Vector3 pos)
+    //{
+        
+    //    agent.SetDestination(pos);
+    //    entered = !entered;
+    //}
 }
